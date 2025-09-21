@@ -8,7 +8,7 @@
   </head>
   <body>
     <h1>Каталог</h1>
-<script>
+  <script>
   const tg = window.Telegram.WebApp;
   tg.ready();
 
@@ -29,37 +29,6 @@
   if (signed) {
     tg.sendData(JSON.stringify({ auto:true, ts: Date.now() }));
   }
-</script>
-
-
-
-// const tg = window.Telegram.WebApp;
- // tg.ready();
-//  document.getElementById('send').onclick = () => {
-//    tg.showPopup({ title: 'Debug', message: 'Жму sendData' }); // видимый маркер
-//    tg.sendData(JSON.stringify({ test: true, ts: Date.now() }));
-//  };
-
-
-
-
-  //  tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
-
-
-
-  // Берём данные пользователя
-  //const user = tg.initDataUnsafe?.user;
-  //if (user) {
-  //  document.body.insertAdjacentHTML(
-  //    'beforeend',
-  //    `<p>Привет, ${user.first_name}!</p>`
-  //  );
-  //} else {
-  //  document.body.insertAdjacentHTML(
-  //    'beforeend',
-  //    `<p>Не вижу данных о пользователе</p>`
-  //  );
-  //}
-
+  </script>
   </body>
 </html>
