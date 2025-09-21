@@ -8,13 +8,17 @@
   </head>
   <body>
     <h1>Тестовый каталог товаров с Калины</h1>
-    <script>
-//      const tg = window.Telegram.WebApp;
-//     tg.ready();
-//      tg.BottomButton.setText('Открыть корзину');
-//     tg.BottomButton.show();
-const tg = window.Telegram.WebApp;
+    <button id="send">Отправить тестовые данные</button>
+<script>
+  const tg = window.Telegram.WebApp;
   tg.ready();
+
+  document.getElementById('send').onclick = () => {
+    const payload = { test: true, ts: Date.now() };
+    tg.sendData(JSON.stringify(payload)); // улетит в бот как web_app_data
+    tg.showPopup({ title: 'OK', message: 'Данные отправлены боту' });
+  };
+
 
   // Берём данные пользователя
   const user = tg.initDataUnsafe?.user;
