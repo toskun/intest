@@ -13,6 +13,21 @@
       tg.ready();
       tg.BottomButton.setText('Открыть корзину');
       tg.BottomButton.show();
+      
+   // Берём данные пользователя
+  const user = tg.initDataUnsafe?.user;
+  if (user) {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<p>Привет, ${user.first_name}!</p>`
+    );
+  } else {
+    document.body.insertAdjacentHTML(
+      'beforeend',
+      `<p>Не вижу данных о пользователе</p>`
+    );
+  }
+
     </script>
   </body>
 </html>
