@@ -7,33 +7,29 @@
     <title>Mini App — тест</title>
   </head>
   <body>
-    <h1>Каталог Калины</h1>
- <script>
-
-
+    <h1>Каталог</h1>
+<script>
   const tg = window.Telegram.WebApp;
   tg.ready();
 
-  // Покажем маркеры запуска
-  document.body.insertAdjacentHTML('beforeend',
-    `<pre id="dbg"></pre>`);
-  const dbg = document.getElementById('dbg');
-  dbg.textContent =
-    'initData length: ' + (tg.initData?.length || 0) + '\n' +
-    'platformVersion: ' + (tg.platformVersion || 'n/a') + '\n' +
-    'start_param: ' + (tg.initDataUnsafe?.start_param || '—');
+  // маркер: проверяем, что подпись есть
+  const signed = (tg.initData?.length || 0) > 0;
 
-  // Кнопка теста
+  // кнопка для отправки
   const btn = document.createElement('button');
   btn.textContent = 'Отправить тестовые данные';
   btn.onclick = () => {
     tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
     tg.sendData(JSON.stringify({ test:true, ts: Date.now() }));
-
-    // На некоторых клиентах сервис-сообщение прилетает после закрытия
-    setTimeout(() => tg.close(), 300);
+    setTimeout(() => tg.close(), 300); // на некоторых клиентах сервис-сообщение шлётся после закрытия
   };
   document.body.appendChild(btn);
+
+  // на автосъём сразу при старте (опционально)
+  if (signed) {
+    tg.sendData(JSON.stringify({ auto:true, ts: Date.now() }));
+  }
+</script>
 
 
 
@@ -64,6 +60,6 @@
   //    `<p>Не вижу данных о пользователе</p>`
   //  );
   //}
-</script>
+
   </body>
 </html>
