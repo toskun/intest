@@ -14,6 +14,7 @@
   tg.ready();
 
   document.getElementById('send').onclick = () => {
+    tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
     const payload = { test: true, ts: Date.now() };
     tg.sendData(JSON.stringify(payload)); // улетит в бот как web_app_data
     tg.showPopup({ title: 'OK', message: 'Данные отправлены боту' });
