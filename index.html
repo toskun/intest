@@ -7,16 +7,42 @@
     <title>Mini App — тест</title>
   </head>
   <body>
-    <h1>Каталог товаров с Калины</h1>
+    <h1>Каталог с Калины</h1>
     <button id="send">Отправить тестовые данные</button>
 <script>
+
   const tg = window.Telegram.WebApp;
   tg.ready();
 
-  document.getElementById('send').onclick = () => {
-    tg.showPopup({ title: 'Debug', message: 'Жму sendData' }); // видимый маркер
-    tg.sendData(JSON.stringify({ test: true, ts: Date.now() }));
+  // Покажем маркеры запуска
+  document.body.insertAdjacentHTML('beforeend',
+    `<pre id="dbg"></pre>`);
+  const dbg = document.getElementById('dbg');
+  dbg.textContent =
+    'initData length: ' + (tg.initData?.length || 0) + '\n' +
+    'platformVersion: ' + (tg.platformVersion || 'n/a') + '\n' +
+    'start_param: ' + (tg.initDataUnsafe?.start_param || '—');
+
+  // Кнопка теста
+  const btn = document.createElement('button');
+  btn.textContent = 'Отправить тестовые данные';
+  btn.onclick = () => {
+    tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
+    tg.sendData(JSON.stringify({ test:true, ts: Date.now() }));
+
+    // На некоторых клиентах сервис-сообщение прилетает после закрытия
+    setTimeout(() => tg.close(), 300);
   };
+  document.body.appendChild(btn);
+
+
+
+// const tg = window.Telegram.WebApp;
+ // tg.ready();
+//  document.getElementById('send').onclick = () => {
+//    tg.showPopup({ title: 'Debug', message: 'Жму sendData' }); // видимый маркер
+//    tg.sendData(JSON.stringify({ test: true, ts: Date.now() }));
+//  };
 
 
 
