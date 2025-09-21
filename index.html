@@ -7,33 +7,37 @@
     <title>Mini App — тест</title>
   </head>
   <body>
-    <h1>Тестовый каталог товаров с Калины</h1>
+    <h1>Каталог товаров с Калины</h1>
     <button id="send">Отправить тестовые данные</button>
 <script>
   const tg = window.Telegram.WebApp;
   tg.ready();
 
   document.getElementById('send').onclick = () => {
-    tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
-    const payload = { test: true, ts: Date.now() };
-    tg.sendData(JSON.stringify(payload)); // улетит в бот как web_app_data
-    tg.showPopup({ title: 'OK', message: 'Данные отправлены боту' });
+    tg.showPopup({ title: 'Debug', message: 'Жму sendData' }); // видимый маркер
+    tg.sendData(JSON.stringify({ test: true, ts: Date.now() }));
   };
 
 
+
+
+  //  tg.showPopup({ title: 'Debug', message: 'Жму sendData' });
+
+
+
   // Берём данные пользователя
-  const user = tg.initDataUnsafe?.user;
-  if (user) {
-    document.body.insertAdjacentHTML(
-      'beforeend',
-      `<p>Привет, ${user.first_name}!</p>`
-    );
-  } else {
-    document.body.insertAdjacentHTML(
-      'beforeend',
-      `<p>Не вижу данных о пользователе</p>`
-    );
-  }
+  //const user = tg.initDataUnsafe?.user;
+  //if (user) {
+  //  document.body.insertAdjacentHTML(
+  //    'beforeend',
+  //    `<p>Привет, ${user.first_name}!</p>`
+  //  );
+  //} else {
+  //  document.body.insertAdjacentHTML(
+  //    'beforeend',
+  //    `<p>Не вижу данных о пользователе</p>`
+  //  );
+  //}
 </script>
   </body>
 </html>
